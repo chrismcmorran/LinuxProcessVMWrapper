@@ -1,14 +1,16 @@
+using System.Collections;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 namespace LinuxProcessUtils;
 
 public static class ProcessExtensions
 {
 
-    public static unsafe bool Read<T>(this Process process, IntPtr address, out T value) where T : unmanaged
+    public static unsafe byte[] Read(this Process process, IntPtr address, int length)
     {
-        var size = Unsafe.SizeOf<T>();
+        var size = length;
         var ptr = stackalloc byte[size];
         var localIo = new iovec
         {
@@ -21,39 +23,43 @@ public static class ProcessExtensions
             iov_len = size
         };
 
-        var res = LinuxLibCImports.process_vm_readv(process.Id, &localIo, 1, &remoteIo, 1, 0);
-        value = *(T*) ptr;
-        return res != -1;
-    }
-    
-    public static unsafe T[] Read<T>(this Process process, IntPtr address, int length = 1) where T : unmanaged
-    {
-        var value = new T[length];
-        for (int i = 0; i < length; i++)
+        var res = LinuxLibCImports.process_vm_readv(process.Id, &localIo, 2, &remoteIo, 1, 0);
+
+        if (res < 0)
         {
-            var pointer = new IntPtr(address.ToInt64() + i);
-            Read<T>(process, pointer, out value[i]);
+            throw new Exception($"Failed to read from {process.Id} at address {address} until {address}+{length}");
         }
-
-        return value;
+        
+        var result = new byte[length];
+        Marshal.Copy((IntPtr)ptr, result, 0, length);
+        return result;
     }
-
     
-    public static unsafe bool Write<T>(Process process, T value, IntPtr address) where T : unmanaged
+
+    public static unsafe void Write(this Process process, byte[] value, IntPtr address)
     {
-        var ptr = &value;
-        var size = Unsafe.SizeOf<T>();
-        var localIo = new iovec
+        int size = Marshal.SizeOf(value[0]) * value.Length;
+        IntPtr pnt = Marshal.AllocHGlobal(size);
+        try
         {
-            iov_base = ptr,
-            iov_len = size
-        };
-        var remoteIo = new iovec
+            Marshal.Copy(value, 0, pnt, value.Length);
+            iovec localIo;
+            localIo.iov_base = pnt.ToPointer();
+            localIo.iov_len = value.Length;
+
+            iovec remoteIo;
+            remoteIo.iov_base = address.ToPointer();
+            remoteIo.iov_len = size;
+            var res = LinuxLibCImports.process_vm_writev(process.Id, &localIo, 1, &remoteIo, 1, 0);
+            if (res < 0)
+            {
+                throw new Exception("Write failed to " + process.Id +
+                                    $" at address 0x{address.ToString("x8")} through 0x{address.ToString("x8")}+0x{value.Length.ToString("x8")}");
+            }
+        }
+        finally
         {
-            iov_base = address.ToPointer(),
-            iov_len = size
-        };
-        var res = LinuxLibCImports.process_vm_writev(process.Id, &localIo, 1, &remoteIo, 1, 0);
-        return res != -1;
+            Marshal.FreeHGlobal(pnt);
+        }
     }
 }
