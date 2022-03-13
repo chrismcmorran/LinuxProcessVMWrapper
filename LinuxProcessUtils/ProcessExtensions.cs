@@ -34,9 +34,17 @@ public static class ProcessExtensions
         Marshal.Copy((IntPtr)ptr, result, 0, length);
         return result;
     }
-    
 
-    public static unsafe void Write(this Process process, byte[] value, IntPtr address)
+
+    public static unsafe void Write(this Process process, void* address, byte[] value)
+    {
+        Write(process, (IntPtr)address, value);
+    }
+    public static unsafe void Write(this Process process, int address, byte[] value)
+    {
+        Write(process, (IntPtr)address, value);
+    }
+    public static unsafe void Write(this Process process, IntPtr address, byte[] value)
     {
         int size = Marshal.SizeOf(value[0]) * value.Length;
         IntPtr pnt = Marshal.AllocHGlobal(size);
