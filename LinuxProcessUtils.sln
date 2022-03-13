@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinuxProcessUtils", "LinuxProcessUtils\LinuxProcessUtils.csproj", "{EDF538FC-5FDD-457B-89F6-7561010987D1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinuxProcessVMWrapper", "LinuxProcessVMWrapper\LinuxProcessVMWrapper.csproj", "{EDF538FC-5FDD-457B-89F6-7561010987D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject1", "TestProject1\TestProject1.csproj", "{28CA27F7-6282-4BA0-9B0D-1F375622B30D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{28CA27F7-6282-4BA0-9B0D-1F375622B30D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

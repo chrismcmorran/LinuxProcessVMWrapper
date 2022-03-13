@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace LinuxProcessUtils;
+namespace LinuxProcessVMWrapper;
 
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct iovec
