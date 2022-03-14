@@ -42,5 +42,22 @@ public class Tests
         Assert.AreEqual(process.Read(address), initialValue[0]);
     }
     
+    [Test]
+    public void TestErrorCodeOnBadRead()
+    {
+        var process = Process.GetCurrentProcess();
+        var address = process.MainModule.BaseAddress -1;
+        try
+        {
+            var read = process.Read(address, 3);
+            Assert.Fail();
+        }
+        catch (Exception)
+        {
+            Assert.Pass();
+        }
+        
+    }
+    
     
 }
