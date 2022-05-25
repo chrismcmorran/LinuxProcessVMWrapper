@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinuxProcessVMWrapper", "LinuxProcessVMWrapper\LinuxProcessVMWrapper.csproj", "{EDF538FC-5FDD-457B-89F6-7561010987D1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extensions", "Extensions\Extensions.csproj", "{EDF538FC-5FDD-457B-89F6-7561010987D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{28CA27F7-6282-4BA0-9B0D-1F375622B30D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{B60F2A6D-14A0-4BE5-9B7C-0019C2770E15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,9 +14,9 @@ Global
 		{EDF538FC-5FDD-457B-89F6-7561010987D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDF538FC-5FDD-457B-89F6-7561010987D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDF538FC-5FDD-457B-89F6-7561010987D1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{28CA27F7-6282-4BA0-9B0D-1F375622B30D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{28CA27F7-6282-4BA0-9B0D-1F375622B30D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{28CA27F7-6282-4BA0-9B0D-1F375622B30D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{28CA27F7-6282-4BA0-9B0D-1F375622B30D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B60F2A6D-14A0-4BE5-9B7C-0019C2770E15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B60F2A6D-14A0-4BE5-9B7C-0019C2770E15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B60F2A6D-14A0-4BE5-9B7C-0019C2770E15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B60F2A6D-14A0-4BE5-9B7C-0019C2770E15}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
